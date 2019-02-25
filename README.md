@@ -1,3 +1,7 @@
+# Roger-Skyline
+	all operations were done on virtual box debian(9.6) in terminal
+	google any command that you dont understand for more clearance
+
 apt install -y vim sudo net-tools iptables-persistent fail2ban sendmail apache2 crontab
 nano /etc/ssh/sshd_config and change lines to:
 
