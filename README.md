@@ -39,8 +39,10 @@ mkdir .ssh
 Then paste the key into .ssh/authorized_keys
 
 sudo nano /etc/ssh/sshd_config
+
     //change line to:
     PasswordAuthentification no.
+    
 sudo service ssh restart
 
 #Exit the ssh with exit and retry a connection with the previous command.
@@ -50,6 +52,7 @@ sudo service ssh restart
 #You will find your VM in the .ssh / known_hosts file.
 
 sudo nano /etc/network/if-pre-up.d/iptables
+
     //enter this:
     #! / Bin / bash
     iptables-restore </etc/iptables.test.rules
@@ -81,21 +84,27 @@ The iptables rules are reset at each reboot. This file will allow the iptables-p
 sudo touch /var/log/apache2/server.log
 
 sudo vim /etc/fail2ban/jail.local
+
     [DEFAULT] destemail = USER@student.42.us.org sender = root@debian
 
 #just to make sure  do it again but now in crontab:
 
 sudo nano/etc/cron.d/packages.sh
+
 	sudo apt-get -y update > /var/log/update_script.log && sudo apt-get -y upgrade >> /var/log/update_script.log
 sudo nano /etc/cron.d/survey.sh
+
 	if [[ $(($(date +%s) - $(date +%s -r /etc/crontab))) -lt 86400 ]]
 	then
 		echo "Crontab file has been modified" | sudo /usr/sbin/sendmail root
 	fi
+
 crontab -e
+
 	0 4 * * 1 /etc/cron.d/packages.sh
 	@reboot /etc/cron.d/packages.sh
 	0 0 * * * /etc/cron.d/survey.sh
+
 
 
 
