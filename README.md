@@ -16,22 +16,33 @@ nano  / etc / network / interfaces
     allow-hotplug enp0s8 iface enp0s8 inet static address 192.168.56.3 netmask 255.255.255.252
 
 su root
+
 adduser username
+
 adduser username sudo
+
 #restart and login as username you jsut created
+
 ssh-keygen
+
 cat ~ / .ssh / id_rsa.pub and copy the entire contents.
 
-#connect to you machine:
+
 ssh root@debian -p 2222
+
 mkdir .ssh
-Then paste the key into .ssh / authorized_keys
+
+Then paste the key into .ssh/authorized_keys
+
 sudo nano /etc/ssh/sshd_config
     //change line to:
     PasswordAuthentification no.
 sudo service ssh restart
+
 #Exit the ssh with exit and retry a connection with the previous command.
+
 #The connection is now password-free with PublicKeys.
+
 #You will find your VM in the .ssh / known_hosts file.
 
 sudo nano /etc/network/if-pre-up.d/iptables
@@ -58,14 +69,18 @@ sudo nano /etc/network/if-pre-up.d/iptables
 	iptables -A port-scanning -j DROP
 
 sudo chmod +x /etc/network/if-pre-up.d/iptables
+
 The iptables rules are reset at each reboot. This file will allow the iptables-persistent package to load your rules every time you reboot. Modify port 2222 by the port of your ssh.
 
-# creates log and send info if files were changed and protects from ddos
+#creates log and send info if files were changed and protects from ddos
+
 sudo touch /var/log/apache2/server.log
+
 sudo vim /etc/fail2ban/jail.local
     [DEFAULT] destemail = USER@student.42.us.org sender = root@debian
 
 #just to make sure  do it again but now in crontab:
+
 sudo nano/etc/cron.d/packages.sh
 	sudo apt-get -y update > /var/log/update_script.log && sudo apt-get -y upgrade >> /var/log/update_script.log
 sudo nano /etc/cron.d/survey.sh
