@@ -2,25 +2,37 @@
 42 Roger-Skyline1
 
 apt install -y vim sudo net-tools iptables-persistent fail2ban sendmail apache2 crontab
+
 nano /etc/ssh/sshd_config and change lines to:
         Port 2222
         PasswordAuthentification yes
         PermitRootLogin no
         PubkeyAuthentication yes
+        
 nano  / etc / network / interfaces
+
 //delete everything and copy-paste:
+
     source /etc/network/interfaces.d/*
+    
     The loopback network interface
+    
     auto lo iface lo inet loopback
 
     allow-hotplug enp0s3 iface enp0s3 inet dhcp
+    
     allow-hotplug enp0s8 iface enp0s8 inet static address 192.168.56.3 netmask 255.255.255.252
 
 su root
+
 adduser username
+
 adduser username sudo
+
 #restart and login as username you jsut created
+
 ssh-keygen
+
 cat ~ / .ssh / id_rsa.pub and copy the entire contents.
 
 #connect to you machine:
